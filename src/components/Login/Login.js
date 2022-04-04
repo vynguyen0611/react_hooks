@@ -3,7 +3,6 @@ import React, { useState, useEffect, useReducer } from "react";
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
-import { act } from "@testing-library/react";
 
 // reducerFn => return a new state
 const emailReducer = (state, action) => {
@@ -18,7 +17,6 @@ const emailReducer = (state, action) => {
   return { value: "", isValid: false };
 };
 
-// reducerFn => return a new state
 const passwordReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
     return { value: action.val, isValid: action.val.trim().length > 6 };
@@ -32,7 +30,7 @@ const passwordReducer = (state, action) => {
 };
 
 const Login = (props) => {
-  // const [enteredEmail, setEnteredEmail] = useState("");
+  // const [enteredEmail, setEnteredEmail] = useState("");git pus
   // const [emailIsValid, setEmailIsValid] = useState();
   // const [enteredPassword, setEnteredPassword] = useState("");
   // const [passwordIsValid, setPasswordIsValid] = useState();
