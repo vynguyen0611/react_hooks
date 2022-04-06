@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext} from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
+import AuthContext from "../../store/auth-context";
 
 // reducerFn => return a new state
 const emailReducer = (state, action) => {
@@ -29,11 +30,8 @@ const passwordReducer = (state, action) => {
   return { value: "", isValid: false };
 };
 
-const Login = (props) => {
-  // const [enteredEmail, setEnteredEmail] = useState("");git pus
-  // const [emailIsValid, setEmailIsValid] = useState();
-  // const [enteredPassword, setEnteredPassword] = useState("");
-  // const [passwordIsValid, setPasswordIsValid] = useState();
+const Login = () => {
+
   const [formIsValid, setFormIsValid] = useState(false);
 
   // reducer for email
@@ -46,6 +44,8 @@ const Login = (props) => {
     value: "",
     isValid: undefined,
   });
+
+  const authCtx = useContext(AuthContext);
 
   const { isValid: emailIsValid } = emailState; // destructuring
   const { isValid: passwordIsValid } = passwordState;
@@ -77,11 +77,6 @@ const Login = (props) => {
 
   const passwordChangeHandler = (event) => {
     dispatchPassword({ type: "USER_INPUT", val: event.target.value });
-
-    // setEnteredPassword(event.target.value);
-    // setFormIsValid(
-    //   event.target.value.trim().length > 6 && enteredEmail.includes('@')
-    // );
   };
 
   const validateEmailHandler = () => {
@@ -96,7 +91,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    authCtx.onLogin(emailState.value, passwordState.value);
   };
 
   return (
